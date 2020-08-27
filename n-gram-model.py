@@ -34,9 +34,9 @@ def ngram_training(document, N,key):
     for doc in document:
         split_words = list(doc.split(' '))
         # molecular
-        [total_grams.append(tuple(split_words[i: i+N])) for i in range(len(split_words)-N+1)]#if N is 2 it count(A,B)
+        [total_grams.append(tuple(split_words[i: i+N])) for i in range(len(split_words)-N+1)]
         # denominator
-        [words.append(tuple(split_words[i:i+N-1])) for i in range(len(split_words)-N+2)]# if N is 2 it count(A)
+        [words.append(tuple(split_words[i:i+N-1])) for i in range(len(split_words)-N+2)]
     total_word_counter = Counter(total_grams)
     word_counter = Counter(words)
     count_molecular = total_word_counter[key]#  if P(B|A) = count(A,B)/count(A) it is the value of count(A,B)
