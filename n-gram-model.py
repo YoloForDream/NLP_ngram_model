@@ -18,7 +18,7 @@ def read_data(path):
     contents = [i for i in contents if i != '']
     return contents
 
-def tuple_edit(t):# replace (to,want) with (to,want.)
+def tuple_edit(t):# Smple:replace (to,want) with (to,want.)
     l = len(t)
     t1 =()
     last_value = t[l-1]+'.'
