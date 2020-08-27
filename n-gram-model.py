@@ -17,6 +17,16 @@ def read_data(path):
     contents = [i for i in contents if i != '']
     return contents
 
+def tuple_edit(t):
+    l = len(t)
+    t1 =()
+    last_value = t[l-1]+'.'
+    last_value_list = []
+    last_value_list.append(last_value)
+    t2 = tuple(last_value_list)
+    t1 = t1 +t[0:l-1]+t2
+    return t1
+   
 def ngram_training(document, N,key):
     total_grams = []
     words = []
