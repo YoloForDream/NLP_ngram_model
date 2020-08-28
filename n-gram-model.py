@@ -11,7 +11,7 @@ from nltk.util import ngrams
 import nltk
 
 
-def read_data(path):
+def read_data(path):# read from corpus
     file = open(path, 'r', encoding='utf-8').read()
     pattern = re.compile(r'<content>(.*?)</content>', re.S)
     contents = pattern.findall(file)
@@ -28,7 +28,7 @@ def tuple_edit(t):# Smple:replace (to,want) with (to,want.)
     t1 = t1 +t[0:l-1]+t2
     return t1
 
-def ngram_training(document, N,key):
+def ngram_training(document, N,key):#Accourding you input n value for ngram and analy inputwords in  the corpus
     total_grams = []
     words = []
     for doc in document:
@@ -52,7 +52,7 @@ def ngram_training(document, N,key):
               next_word_prob = 1
     return next_word_prob
   
-def precision(t,n,data):
+def precision(t,n,data):#Store probabilistic results in different corpus
     ngram_probability =[]
     for w in t:
         p= ngram_training(data,n,w)
@@ -61,7 +61,7 @@ def precision(t,n,data):
     t = Sen_possibility(ngram_probability)
     return t
     
-def Sen_possibility(list_P):
+def Sen_possibility(list_P):#Calculate the probability
     P = 1
     for p in list_P:
         P *= p
