@@ -39,7 +39,7 @@ def ngram_training(document, N,key):#Accourding you input n value for ngram and 
         [words.append(tuple(split_words[i:i+N-1])) for i in range(len(split_words)-N+2)]
     total_word_counter = Counter(total_grams)
     word_counter = Counter(words)
-    count_molecular = total_word_counter[key]#  if P(B|A) = count(A,B)/count(A) it is the value of count(A,B)
+    count_molecular = total_word_counter[key]#  if P(B|A) = count(A,B)/count(A) it is the value of count(A,B) key is value like bigram .(A,B)
     count_denominator = word_counter[key[:N - 1]]  # count(A) value
     count_molecular_change = total_word_counter[tuple_edit(key)]#Sample:if (to,want) not in corpus try to check (to ,want.)
     if count_molecular == 0 and count_molecular_change !=0:
