@@ -48,7 +48,7 @@ def ngram_training(document, N,key): #Accourding you input n value for ngram and
               next_word_prob = count_molecular/count_denominator
     elif count_molecular == 0 and count_denominator != 0:#bakeoff
               next_word_prob = (count_molecular+1)/(count_denominator+1)
-    elif count_molecular == 0 and count_denominator == 0:
+    elif count_molecular == 0 and count_denominator == 0:# cannot calulator 0/0 so i just add 1 
               next_word_prob = 1
     return next_word_prob
   
