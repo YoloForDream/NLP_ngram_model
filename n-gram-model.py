@@ -46,10 +46,8 @@ def ngram_training(document, N,key): #Accourding you input n value for ngram and
             count_molecular = count_molecular_change
     if count_molecular != 0 and  count_denominator!= 0:
               next_word_prob = count_molecular/count_denominator
-    elif count_molecular == 0 and count_denominator != 0:#bakeoff
-              next_word_prob = (count_molecular+1)/(count_denominator+1)
-    elif count_molecular == 0 and count_denominator == 0:# cannot calulator 0/0 so i just add 1 
-              next_word_prob = 1
+    elif count_molecular == 0:
+              next_word_prob = 0
     return next_word_prob
 
 def Sen_possibility(list_P): #Calculate the probability
@@ -63,29 +61,35 @@ def precision(input_nagrm,n,data): #Store probabilistic results in different cor
     for gram in input_ngram:
         p= ngram_training(data,n,gram)
         ngram_probability.append(p)
-    print(ngram_probability)
-    t = Sen_possibility(ngram_probability)
-    return t
-    
+    return ngram_probability
+  
+ def get_no_exist_gram(ngram_probability):# find the gram not in the current corpus
+    Index = []
+    ngram_probability = precision(input_ngram,n,data)
+    for i in range(0,len(ngram_probability)):
+        if ngram_probability[i] ==0:
+            Index.append(i)
+    return Index # return the index of ngram_probability which value equal 0
 
 
 if __name__ == '__main__':
-    corpus_list =['t_1.txt','t_2.txt','t_3.txt','t_4.txt','t_5.txt',
-                't_6.txt','t_7.txt','t_8.txt','t_9.txt','t_10.txt']
+    corpus_list =['t_1.txt','t_2.txt','t_3.txt']
     user_input = input("Inpurt your word:")
     unigrams = nltk.word_tokenize(user_input)
     n = int(input('Input the n value for n-grams:'))
     input_ngram = list(ngrams(unigrams, n))
     print(input_ngram)
     probability_collection = []
-    for corpus in corpus_list:    #The probability of a Sent in a 10-word library is calculated
+    data = []#Store the corpus
+    for corpus in corpus_list:    
         corpus = 'corpus/'+corpus
-        data = read_data(corpus)
-        p = precision(input_ngram,n,data)
-        probability_collection.append(p)
-    print(probability_collection)
-    for p in probability_collection:#Calculate the average of the 10 probability values
-        total_p  = p + p 
-    expect = total_p/10
-    print(expect)
+        data = read_data(corpus) + data
+    ngram_probability = precision(input_ngram,n,data)
+    print(ngram_probability)
+    Index = get_no_exist_gram(ngram_probability)
+    if len(Index) == 0:# if there is no 0 value in list of ngram_probability 
+        print('The probability of accuracy of this statement is '+str(Sen_possibility(ngram_probability)))
+    else :
+        print(Index)#Find a gram that does not exist according to the index, 
+        # then call Edit Distance to find a similar value, replace the original input sentence,  analysis again
     
