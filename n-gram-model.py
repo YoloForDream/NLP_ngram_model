@@ -51,21 +51,23 @@ def ngram_training(document, N,key): #Accourding you input n value for ngram and
     elif count_molecular == 0 and count_denominator == 0:# cannot calulator 0/0 so i just add 1 
               next_word_prob = 1
     return next_word_prob
-  
-def precision(t,n,data): #Store probabilistic results in different corpus
+
+def Sen_possibility(list_P): #Calculate the probability
+    P = 1
+    for p in list_P:
+        P *= p
+    return P  
+
+def precision(input_nagrm,n,data): #Store probabilistic results in different corpus
     ngram_probability =[]
-    for w in t:
-        p= ngram_training(data,n,w)
+    for gram in input_ngram:
+        p= ngram_training(data,n,gram)
         ngram_probability.append(p)
     print(ngram_probability)
     t = Sen_possibility(ngram_probability)
     return t
     
-def Sen_possibility(list_P): #Calculate the probability
-    P = 1
-    for p in list_P:
-        P *= p
-    return P
+
 
 if __name__ == '__main__':
     corpus_list =['t_1.txt','t_2.txt','t_3.txt','t_4.txt','t_5.txt',
