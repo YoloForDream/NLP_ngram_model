@@ -65,7 +65,6 @@ def precision(input_nagrm,n,data): #Store probabilistic results in different cor
   
  def get_no_exist_gram(ngram_probability):# find the gram not in the current corpus
     Index = []
-    ngram_probability = precision(input_ngram,n,data)
     for i in range(0,len(ngram_probability)):
         if ngram_probability[i] ==0:
             Index.append(i)
